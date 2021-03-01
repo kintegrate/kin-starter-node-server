@@ -9,7 +9,6 @@ export class Kin {
 
   constructor(env: Environment, appIndex?: number) {
     this.client = new Client(env, { appIndex, kinVersion: 4 })
-    console.log(`Kin Environment: ${Environment[Environment.Test]}`)
   }
 
   async createAccount(privateKey: PrivateKey): Promise<PublicKey[]> {
@@ -41,5 +40,17 @@ export class Kin {
       memo,
       quarks: kinToQuarks(amount),
     })
+  }
+
+  async submitEarn(sender: PrivateKey, destination: PublicKey, amount: string, memo?: string) {
+    return this.submitPayment(sender, destination, amount, TransactionType.Earn, memo)
+  }
+
+  async submitSpend(sender: PrivateKey, destination: PublicKey, amount: string, memo?: string) {
+    return this.submitPayment(sender, destination, amount, TransactionType.Spend, memo)
+  }
+
+  async submitP2P(sender: PrivateKey, destination: PublicKey, amount: string, memo?: string) {
+    return this.submitPayment(sender, destination, amount, TransactionType.P2P, memo)
   }
 }
