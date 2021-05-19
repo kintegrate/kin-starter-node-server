@@ -11,7 +11,7 @@
   "author": "Bram Borggreve",
   "license": "ISC",
   "devDependencies": {
-    "@kinecosystem/kin-sdk-v2": "^0.4.0",
+    "@kinecosystem/kin-sdk-v2": "^0.5.0",
     "@types/bs58": "^4.0.1",
     "@types/node": "14",
     "bs58": "^4.0.1",
@@ -19,6 +19,6 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@kinecosystem/agora-api": "^0.25.0"
+    "@kinecosystem/agora-api": "^0.26.1"
   }
 }

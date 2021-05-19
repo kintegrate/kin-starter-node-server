@@ -8,7 +8,7 @@ export class Kin {
   readonly client: Client
 
   constructor(env: Environment, appIndex?: number) {
-    this.client = new Client(env, { appIndex, kinVersion: 4 })
+    this.client = new Client(env, { appIndex })
   }
 
   async createAccount(privateKey: PrivateKey): Promise<PublicKey[]> {
