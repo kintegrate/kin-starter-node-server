@@ -1,10 +1,16 @@
 import { Environment, quarksToKin } from '@kinecosystem/kin-sdk-v2'
+import * as dotenv from 'dotenv'
 import { Kin } from './kin'
 import { sleep } from './utils'
 
-export async function main(): Promise<number> {
+dotenv.config()
+
+export async function main() {
+  const env = Environment.Test
+  const APP_INDEX = Number(process.env.KIN_APP_INDEX)
+
   // Set up Kin client
-  const kin = new Kin(Environment.Test)
+  const kin = new Kin(env, APP_INDEX)
 
   // Prepare tokens for Alice and Bob
   const privateKeyAlice = Kin.generateKey()
@@ -48,8 +54,13 @@ export async function main(): Promise<number> {
   console.log('💸 Submit P2P Payment from Alice to Bob')
   await kin.submitP2P(privateKeyAlice, privateKeyBob.publicKey(), '2', 'My demo payment')
 
+  console.log('💸 Submit Earn from Alice to Bob')
+  await kin.submitEarn(privateKeyAlice, privateKeyBob.publicKey(), '2', 'My demo Earn')
+
+  console.log('💸 Submit Spend from Alice to Bob')
+  await kin.submitSpend(privateKeyAlice, privateKeyBob.publicKey(), '2', 'My demo Spend')
+
   await sleepAndPrintBalances()
 
   console.log('✅ Done!')
-  return 0
 }
